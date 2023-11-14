@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .container form {
+            display: inline-block;
+        }
+
+        .container button {
+            padding: 10px;
+            font-size: 20px;
+        }
+    </style>
+    <style>
+        .container {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+    
+        .row form {
+            display: inline-block;
+        }
+    
+        .row button {
+            padding: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div>
+            <a href="{{link}}"></a>
+            <br>
+            <br>
+            <br>
+            
+        </div>
+        <div class="row">
+            <form method="POST" id="form1">
+                <input type="hidden" name="id" value="{{id}}">
+                <input type="hidden" name="value" value="1"> <!-- Add 'value' field -->
+                <button type="button" onclick="submitForm('form1')"><i class="fas fa-one"></i> ⬆️</button>
+            </form>
+            <form method="POST" id="form2">
+                <input type="hidden" name="id" value="{{id}}">
+                <input type="hidden" name="value" value="2"> <!-- Add 'value' field -->
+                <button type="button" onclick="submitForm('form2')"><i class="fas fa-one"></i> ⬆️</button>
+            </form>
+            <form method="POST" id="form3">
+                <input type="hidden" name="id" value="{{id}}">
+                <input type="hidden" name="value" value="3"> <!-- Add 'value' field -->
+                <button type="button" onclick="submitForm('form3')"><i class="fas fa-one"></i> ◀️</button>
+            </form>
+            <form method="POST" id="form4">
+                <input type="hidden" name="id" value="{{id}}">
+                <input type="hidden" name="value" value="4"> <!-- Add 'value' field -->
+                <button type="button" onclick="submitForm('form4')"><i class="fas fa-one"></i> ⏪</button>
+            </form>
+            <form method="POST" id="form5">
+                <input type="hidden" name="id" value="{{id}}">
+                <input type="hidden" name="value" value="5"> <!-- Add 'value' field -->
+                <button type="button" onclick="submitForm('form5')"><i class="fas fa-one"></i> 🔃</button>
+            </form>
+            <form method="POST" id="form6">
+                <input type="hidden" name="id" value="{{id}}">
+                <input type="hidden" name="value" value="6"> <!-- Add 'value' field -->
+                <button type="button" onclick="submitForm('form6')"><i class="fas fa-one"></i> ➡️</button>
+            </form>
+            <form method="POST" id="form7">
+                <input type="hidden" name="id" value="{{id}}">
+                <input type="hidden" name="value" value="7"> <!-- Add 'value' field -->
+                <button type="button" onclick="submitForm('form7')"><i class="fas fa-one"></i> ❌</button>
+            </form>
+            <form method="POST" id="form8">
+                <input type="hidden" name="id" value="{{id}}">
+                <input type="hidden" name="value" value="8"> <!-- Add 'value' field -->
+                <button type="button" onclick="submitForm('form8')"><i class="fas fa-one"></i> ⚙</button>
+            </form>
+            <script>
+                function submitForm(formId) {
+                    var formData = new FormData(document.getElementById(formId));
+
+                    fetch("{{ url_for('routes.api', id=id) }}", {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            // Handle the response data if needed
+                            console.log(data);
+                        })
+                        .catch(error => {
+                            // Handle errors if any
+                            console.error(error);
+                        });
+                }
+            </script>
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>
