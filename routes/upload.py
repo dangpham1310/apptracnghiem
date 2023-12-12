@@ -36,15 +36,20 @@ def dapan(code):
     return render_template('dapan.html', ads_content=ads_content)
 
 
-@routes.route('/<code>/<name>/<lophoc>/<socau>', methods=['GET'])
-def senddapan(code,name,lophoc,socau):
-
-    current_utc_time = datetime.utcnow()
-    current_gmt_plus_7_time = current_utc_time + timedelta(hours=7)
-    user = User(code=code,name = name,lophoc = lophoc,socau = socau,time = current_gmt_plus_7_time)
-    db.session.add(user)
-    db.session.commit()
-    return "OK"
+@routes.route('/sendapan', methods=['POST'])
+def senddapan():
+    if request.method == 'POST':
+        code = request.form['code']
+        name = request.form['name']
+        lophoc = request.form['lophoc']
+        socau = request.form['socau']
+        
+        current_utc_time = datetime.utcnow()
+        current_gmt_plus_7_time = current_utc_time + timedelta(hours=7)
+        user = User(code=code,name = name,lophoc = lophoc,socau = socau,time = current_gmt_plus_7_time)
+        db.session.add(user)
+        db.session.commit()
+        return "OK"
 
 @routes.route('/ketqua', methods=['GET',"POST"])
 def ketqua():
